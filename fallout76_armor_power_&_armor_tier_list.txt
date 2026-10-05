@@ -1,0 +1,101 @@
+Fallout 76 Armor & Power Armor Tier List — Update 70 / September 2026
+General PvE / endgame-oriented ranking.
+
+S = exceptional/top-tier
+A = excellent
+B = good/viable
+C = decent/situational
+D = weak/niche
+F = extremely weak/novelty
+
+Assumptions:
+- Max-level armor and a reasonably optimized build.
+- Normal legendary effects are assumed; excellent legendary rolls can move a set up in practical value.
+- Ranking considers survivability, resistances, set bonuses, mod support, utility, availability, build synergy and endgame usefulness.
+- For armor families with light/sturdy/heavy versions, the best endgame version is assumed unless otherwise stated.
+- Named unique armor pieces are ranked separately because they occupy only one armor slot rather than forming full sets.
+- Cosmetic outfits, Atomic Shop skins/paints and apparel with no meaningful armor function are not ranked.
+- Underarmor and hazmat/body suits are not part of the main armor-set ranking.
+- This is a practical tier list, not a claim that every armor set within a tier is identical.
+
+Sources checked:
+- Bethesda Fallout 76: The Slasher / Update 70 release notes (September 15, 2026).
+- Bethesda Fallout 76: The Backwoods release notes (March 3, 2026).
+- Fallout Wiki current Fallout 76 armor roster and armor comparison.
+- Fallout Wiki current Fallout 76 power armor roster and comparison.
+- Nuka Knights current 2026 unique-armor and Slasher references.
+
+[STANDARD_ARMOR_SETS]
+
+S|Secret Service Armor|Best all-around conventional armor choice for most endgame players: excellent balanced ballistic, energy and radiation resistance, heavy-armor classification and access to a jet pack.
+S|Civil Engineer Armor|Outstanding endgame utility set with extremely high Energy Resistance, strong Radiation Resistance, a useful full-set weapon-durability/fire retaliation bonus and jet-pack support.
+S|Brotherhood Recon Armor|Exceptional ballistic protection with strong overall endgame defenses and jet-pack support; trades some Energy/Radiation protection versus Secret Service for very high Damage Resistance.
+S|Covert Scout Armor|Premier stealth armor set; built-in sneak bonuses stack across the set while still providing solid defenses and excellent synergy with stealth/V.A.T.S. builds.
+
+A|Solar Armor|Excellent team/support armor because the full-set effect regenerates health for the wearer and nearby teammates; lower raw defenses than the top heavy sets but superb utility.
+A|Thorn Armor|Excellent stealth/melee specialist set with sneak benefits plus bleed/poison-style offensive retaliation effects; very strong when built around its niche.
+A|Botsmith Armor|One of the strongest non-bullion-style defensive sets, with very good ballistic and radiation resistance and high durability; lacks the special utility of the S-tier sets.
+A|Arctic Marine Armor|Strong balanced medium armor and the only regular armor set with dedicated Cryo Resistance; especially valuable in cryogenic-heavy encounters.
+A|Marine Armor|Dependable medium armor with useful Radiation Resistance and good all-around protection; remains a strong practical set even though newer sets surpass it.
+A|Heavy Combat Armor|Classic endgame-capable armor with balanced ballistic and energy protection, excellent durability and broad mod availability; outclassed by newer premium sets but still very effective.
+A|Forest Scout Armor|Light, efficient armor with strong ballistic defense and good mod support; an excellent general-purpose option when premium sets are unavailable.
+A|Urban Scout Armor|Functionally similar to Forest Scout Armor and still a strong general-purpose light armor choice with solid defenses and useful mods.
+
+B|Heavy Robot Armor|Balanced ballistic/energy defenses with built-in Radiation Resistance and excellent durability; good but generally less efficient than modern endgame sets.
+B|Heavy Leather Armor|Excellent Energy Resistance for conventional armor and useful against energy-heavy enemies, but relatively weak ballistic protection limits general use.
+B|Heavy Metal Armor|Very high ballistic protection for a traditional set, but poor Energy Resistance makes it matchup-dependent.
+B|Trapper Armor|Useful Radiation Resistance and respectable niche value, but lower general defenses and fewer compelling endgame advantages than modern sets.
+B|Sturdy Combat Armor|Solid balanced protection and good mod access; perfectly viable while progressing toward heavy or premium armor.
+B|Sturdy Robot Armor|Balanced defenses plus Radiation Resistance, but mostly a transitional set at endgame.
+B|Sturdy Leather Armor|Good Energy Resistance and light weight, but limited ballistic defense keeps it situational.
+B|Sturdy Metal Armor|Good ballistic protection for midgame use but notably weak against energy damage.
+B|Raider Armor (Heavy)|Usable ballistic-focused traditional armor with broad availability, but weak overall compared with later sets.
+
+C|Light Combat Armor|Balanced and easy to use while leveling, but its resistance totals are too low to compete with endgame armor.
+C|Light Robot Armor|Provides all three common resistance types and strong durability, but raw defenses are low.
+C|Light Leather Armor|Good early Energy Resistance but poor ballistic defense and low endgame ceiling.
+C|Light Metal Armor|Strong early ballistic resistance but extremely weak Energy Resistance.
+C|Raider Armor (Sturdy)|Serviceable leveling armor but little reason to keep it once higher-tier sets are available.
+C|Raider Armor (Light)|Easy to obtain early but low defenses and weak endgame value.
+C|Wood Armor|Very light and stealth-friendly, but extremely low overall protection gives it little general endgame value.
+
+[NAMED_UNIQUE_ARMOR_PIECES]
+
+S|Rage|Raider chest with a unique stacking damage mechanic: taking hits can build up to +100% damage at the cost of also taking more damage. Extremely powerful for aggressive builds that can manage the risk.
+S|Last Stand|Brotherhood Recon chest that converts 50% of evade chance into Damage Reduction while disabling Evade; a powerful defensive unique effect on an already excellent armor platform.
+A|Bulwark|Secret Service chest with 35% more protection at the cost of double weight; exceptional raw defense, though the fixed unique tradeoff and single-slot nature keep it below the most build-defining pieces.
+A|Stand Fast|Combat Armor chest whose armor increases with movement speed, up to +50 armor; strong defensive value for fast-moving builds.
+A|Last Bastion|Urban Scout chest whose gun accuracy increases as health falls, making it especially useful for low-health ranged builds.
+B|Silver Lining|Leather chest that reflects 10% of incoming damage; useful passive retaliation but less impactful than the strongest unique chest effects.
+B|Road Kill|Trapper left arm with Overeater-oriented defaults and the ability to eat animal corpses to restore health; flavorful and useful but highly situational.
+C|Trail Warden|Metal chest with +50% throwing-weapon damage; excellent only for dedicated throwing builds and otherwise weak as a general endgame choice.
+
+[POWER_ARMOR_SETS]
+
+S|Union Power Armor|Arguably the best all-purpose Power Armor set because its full-set bonuses provide +75 carry weight and +150 Poison Resistance while retaining strong ballistic defense; superb daily-use utility.
+S|Vulcan Power Armor|Elite endgame Power Armor with extremely high ballistic and Energy Resistance plus bonuses to fusion-core duration and AP refresh; exceptional for V.A.T.S./AP-heavy Power Armor builds.
+S|Hellcat Power Armor|One of the best defensive sets because every piece reduces incoming ballistic damage, reaching -12% ballistic damage with a full set; excellent against the most common gunfire threats.
+S|T-65 Power Armor|Highest raw ballistic resistance among the established Power Armor sets and outstanding overall defenses; lacks the utility bonuses of Union/Vulcan but remains an elite tanking set.
+
+A|Strangler Heart Power Armor|Excellent defenses plus a full-set acid/poison offensive effect; strong hybrid defense/offense choice, though its special damage is less dominant than in older metas.
+A|Excavator Power Armor|Lower defenses than premium sets but incredible everyday utility from +100 carry weight and doubled ore yield; one of the most useful Power Armor sets in the game for general play.
+A|T-51b Power Armor|Outstanding ballistic and Energy Resistance with weaker Radiation Resistance; extremely strong raw protection for a classic set.
+A|Ultracite Power Armor|Strong, balanced endgame defenses and broad usefulness; slightly overshadowed by newer sets with stronger bonuses.
+A|X-01 Power Armor|Excellent Energy and Radiation Resistance with respectable ballistic protection; still a strong endgame set, particularly against energy/radiation-heavy threats.
+
+B|T-60 Power Armor|Well-rounded defenses and iconic mod/paint support, but no set bonus and lower raw protection than the best modern sets.
+B|T-45 Power Armor|Balanced and easy to acquire with respectable protection, but mainly a progression or budget set once higher-end Power Armor becomes available.
+B|Raider Power Armor|Accessible early and fully functional, but has the lowest endgame ceiling among the conventional Power Armor sets.
+
+[ANNOUNCED_NOT_YET_RANKED]
+
+UNRANKED|The Slasher unique Power Armor reward|Bethesda has announced a unique Power Armor set as a reward from the eventual Pint-Sized Slasher confrontation, but as of September 28, 2026 the multi-week Slasher storyline has not yet reached that final reward and Bethesda has not published enough finalized gameplay information to rank it fairly.
+
+[NOTES]
+
+- All Power Armor inherently provides major damage and radiation mitigation beyond the listed DR/ER/RR values, so even lower-tier Power Armor remains very survivable.
+- After the March 2026 Backwoods update, Power Armor/chassis weight behavior was reworked and full suits matter more in high-radiation environments.
+- Legendary effects can outweigh modest base-stat differences. A well-rolled Overeater's set, for example, can be more valuable in practice than a higher-ranked set with poor effects.
+- For non-Power Armor, Secret Service / Brotherhood Recon are heavy armor, Civil Engineer / Arctic Marine / Marine / Trapper are medium, and scout/Solar/Thorn/Wood are light under the modern armor-class system.
+- Mixing armor pieces can be useful for legendary effects, but full-set bonuses on Civil Engineer, Solar, Thorn, Union, Vulcan, Excavator and similar sets reward complete sets.
+

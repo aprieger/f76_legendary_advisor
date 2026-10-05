@@ -6,23 +6,39 @@ Decide what to do with a Fallout 76 legendary item:
 
     KEEP  |  SCRAP (learn the mod)  |  CAMP VENDOR SELL  |  LEGENDARY EXCHANGE (scrip)  |  NPC VENDOR SELL
 
+Grades both axes of a legendary item: the legendary mods rolled on it AND
+the specific weapon/armor it's rolled onto (an S-tier weapon with a mediocre
+roll can still be worth keeping; a C-tier weapon with a great roll may not be).
+
 Usage
 -----
-    python f76_legendary_advisor.py melee --one Juggernaut's --two Riposting --three Lightweight
-    python f76_legendary_advisor.py ranged --one Quad --two Rapid --three "V.A.T.S. Optimized" --rate fast --build commando
-    python f76_legendary_advisor.py armor --one Unyielding --two Luck --three Sentinel's --four Limit-Breaking --build bloodied
-    python f76_legendary_advisor.py pa --one Overeater's --two Powered --three Thru-hiker's
-    python f76_legendary_advisor.py armor --one Bolstering --json
+    python f76_legendary_advisor.py melee --item "Super Sledge" --one Juggernaut's --two Riposting --three Lightweight
+    python f76_legendary_advisor.py ranged --item "The Fixer" --one Quad --two Rapid --three "V.A.T.S. Optimized" --build commando
+    python f76_legendary_advisor.py armor --item "Secret Service Armor" --one Unyielding --two Luck --three Sentinel's
+    python f76_legendary_advisor.py pa --item "Union Power Armor" --one Overeater's --two Powered --json
+    python f76_legendary_advisor.py --list-items ranged
     python f76_legendary_advisor.py --list ranged 1
 
-All of --one/--two/--three/--four are optional. Effect names are matched
-case-insensitively and ignore punctuation ("vats optimized" == "V.A.T.S. Optimized",
-"aa" == "Anti-Armor").
+--item is optional - omit it to grade the roll alone, same as before. All of
+--one/--two/--three/--four are also optional (though you need at least one of
+--item or a mod slot to grade anything). Names are matched case-insensitively,
+ignore punctuation, and fall back to partial-name matching when unambiguous.
 
-The tier data is the comprehensive community tier-list database (280 category
-rows / ~142 distinct effect names, covering every 1st-4th star legendary
-effect obtainable on ranged weapons, melee weapons, armor and power armor),
-embedded below. Point --tierfile at an updated copy of that file to override it.
+DATA FILES - no path arguments needed. This script auto-loads three .txt
+files from its OWN folder (wherever this .py file lives, not the current
+working directory) by matching filename keywords:
+
+    legendary-mod tier list  <- filename contains "legendary" and "mod"
+    weapon tier list         <- filename contains "weapon" and "tier" (not "legendary")
+    armor tier list          <- filename contains "armor" and "tier" (not "legendary"/"weapon")
+
+Keep the script and its three data files together in one folder and it just
+works; edit those .txt files any time to update the rankings without touching
+this script. If the legendary-mod file is missing, a built-in default is used
+as a fallback. If the weapon/armor files are missing, --item simply can't be
+scored (a note says so) and everything else still works. Override any of the
+three with --moddata / --weapondata / --armordata if you'd rather not rely on
+auto-detection, or use --tierfile as a legacy alias for --moddata.
 """
 
 from __future__ import annotations
@@ -33,6 +49,29 @@ import os
 import re
 import sys
 import textwrap
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def find_data_file(directory, must_contain, must_not_contain=()):
+    """Find a .txt file in `directory` whose lowercased name contains every
+    token in must_contain and none of must_not_contain. Used to auto-load
+    the three data files without the person needing to pass any paths, as
+    long as they sit in the same folder as this script."""
+    try:
+        entries = os.listdir(directory)
+    except OSError:
+        return None
+    candidates = []
+    for fn in entries:
+        if not fn.lower().endswith(".txt"):
+            continue
+        low = fn.lower()
+        if (all(tok in low for tok in must_contain)
+                and not any(tok in low for tok in must_not_contain)):
+            candidates.append(fn)
+    candidates.sort()
+    return os.path.join(directory, candidates[0]) if candidates else None
 
 # ---------------------------------------------------------------------------
 # 1. EMBEDDED TIER LIST (the supplied standard; override with --tierfile)
@@ -464,6 +503,14 @@ CATEGORY_LABEL = {
     "POWER_ARMOR": "Power armor",
 }
 
+# Canonical short CLI spelling for each category, for --list-items hints.
+CATEGORY_CLI_NAME = {
+    "RANGED_WEAPONS": "ranged",
+    "MELEE_WEAPONS": "melee",
+    "REGULAR_ARMOR": "armor",
+    "POWER_ARMOR": "pa",
+}
+
 # Rows in the standard that are catch-all buckets rather than real effect names.
 CATCHALL_PATTERNS = {
     "special": re.compile(r"special", re.I),
@@ -594,6 +641,156 @@ def load_table(path=None):
         with open(path, "r", encoding="utf-8") as fh:
             return parse_tierlist(fh.read())
     return parse_tierlist(EMBEDDED_TIERLIST)
+
+
+# ---------------------------------------------------------------------------
+# 2b. NAMED-ITEM TIER LISTS (weapon tier list / armor & power armor tier list)
+# ---------------------------------------------------------------------------
+# These are a second, independent axis: which specific gun/armor set you
+# rolled the legendary effects onto. Both files share one simple shape -
+# [SECTION] headers, optional "# subgroup label" comment lines, and
+# Tier|Name|Description rows - so one parser handles both.
+
+ITEM_SECTION_CATEGORY = {
+    "RANGED_WEAPONS": "RANGED_WEAPONS",
+    "MELEE_WEAPONS": "MELEE_WEAPONS",
+    "STANDARD_ARMOR_SETS": "REGULAR_ARMOR",
+    "NAMED_UNIQUE_ARMOR_PIECES": "REGULAR_ARMOR",
+    "POWER_ARMOR_SETS": "POWER_ARMOR",
+}
+ITEM_SECTION_SUBGROUP = {
+    "STANDARD_ARMOR_SETS": "standard set",
+    "NAMED_UNIQUE_ARMOR_PIECES": "named unique piece",
+    "POWER_ARMOR_SETS": "power armor set",
+}
+
+
+def parse_item_file(text: str):
+    """Parse a named-item tier-list file into {category: {normkey: Effect}}.
+
+    Unrecognized sections (NOTES, ANNOUNCED_NOT_YET_RANKED, etc.) are skipped
+    entirely. Rows whose tier isn't one of S/A/B/C/D/F (e.g. "UNRANKED") are
+    kept but flagged unrated at resolution time rather than scored as junk.
+    """
+    table = {}
+    category = None
+    subgroup = "mainline"
+
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+
+        if line.startswith("[") and line.endswith("]"):
+            tag = line[1:-1].upper()
+            category = ITEM_SECTION_CATEGORY.get(tag)
+            subgroup = ITEM_SECTION_SUBGROUP.get(tag, "mainline")
+            continue
+
+        if line.startswith("#"):
+            label = line.lstrip("#").strip().lower()
+            if label:
+                subgroup = label
+            continue
+
+        if category is None or "|" not in line:
+            continue
+
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) < 2 or not parts[0]:
+            continue
+
+        tier = parts[0].upper()
+        name = parts[1]
+        desc = parts[2] if len(parts) > 2 else ""
+        eff = Effect(tier, name, desc, category, "ITEM", source=subgroup)
+        table.setdefault(category, {})[norm(name)] = eff
+
+    return table
+
+
+def load_item_tables(paths):
+    """Merge one or more parsed item files into a single {category: {...}} table."""
+    combined = {}
+    loaded_from = []
+    for path in paths:
+        if not path or not os.path.isfile(path):
+            continue
+        with open(path, "r", encoding="utf-8") as fh:
+            parsed = parse_item_file(fh.read())
+        for cat, bucket in parsed.items():
+            combined.setdefault(cat, {}).update(bucket)
+        if parsed:
+            loaded_from.append(path)
+    return combined, loaded_from
+
+
+def resolve_item(item_table, category, raw_name):
+    """Fuzzy-resolve a named weapon/armor against its tier list."""
+    r = Resolved("ITEM", raw_name)
+    bucket = item_table.get(category, {})
+    if not bucket:
+        r.unrated = True
+        kind = "weapon" if category in ("RANGED_WEAPONS", "MELEE_WEAPONS") else "armor"
+        r.notes.append(f"No {kind} tier-list file found next to the script - "
+                       f"item-level scoring skipped for this run.")
+        return r
+
+    key = norm(raw_name)
+    eff = bucket.get(key)
+
+    if eff is None and len(key) >= 3:
+        candidates = [v for k, v in bucket.items() if key in k or k in key]
+        if len(candidates) == 1:
+            eff = candidates[0]
+            r.via = f"partial-name match to '{eff.name}'"
+        elif len(candidates) > 1:
+            names = ", ".join(sorted({c.name for c in candidates})[:6])
+            r.unrated = True
+            r.notes.append(f"Ambiguous name - matches multiple items ({names}"
+                           f"{', ...' if len(candidates) > 6 else ''}). "
+                           f"Use --list-items {CATEGORY_CLI_NAME[category]} for exact names.")
+            return r
+
+    if eff is None:
+        r.unrated = True
+        r.notes.append(f"Not found on the weapon/armor tier list. Use "
+                       f"--list-items {CATEGORY_CLI_NAME[category]} to see recognized names.")
+        return r
+
+    r.effect = eff
+    if eff.tier not in TIER_POINTS:
+        r.unrated = True
+        r.tier = eff.tier
+        note = f"Not yet tier-ranked by the community list ({eff.tier})"
+        if eff.desc:
+            note += f": {eff.desc}"
+        r.notes.append(note)
+        return r
+
+    r.tier = eff.tier
+    r.points = eff.points
+    r.adjusted = eff.points
+    if eff.source and eff.source != "mainline":
+        r.notes.append(f"Listing: {eff.source}")
+    return r
+
+
+def list_items(item_table, category):
+    rows = item_table.get(category, {})
+    if not rows:
+        print(f"No item tier-list data loaded for {CATEGORY_LABEL[category]}.")
+        return
+    print(f"{CATEGORY_LABEL[category]} - named items")
+    print("-" * 60)
+    for tier in TIER_ORDER + ["UNRANKED"]:
+        group = sorted((e for e in rows.values() if e.tier == tier),
+                       key=lambda e: e.name)
+        if not group:
+            continue
+        for eff in group:
+            print(f"  {tier}  {eff.name}" + (f"  ({eff.source})"
+                  if eff.source and eff.source != "mainline" else ""))
 
 
 # ---------------------------------------------------------------------------
@@ -738,7 +935,7 @@ RATE_MODS = {
              "twoshot": 0.5, "rapid": 0.25, "lastshot": 0.5},
 }
 
-SLOT_WEIGHT = {1: 1.0, 2: 0.9, 3: 0.6, 4: 1.0}
+SLOT_WEIGHT = {1: 1.0, 2: 0.9, 3: 0.6, 4: 1.0, "ITEM": 1.2}
 
 
 def apply_context(resolved_list, builds, rate):
@@ -922,7 +1119,8 @@ def render(category, resolved, personal, market, action, confidence,
         out.append("    (no effects supplied)")
     for r in resolved:
         tier = r.tier or "?"
-        label = f"  {r.star}-star  [{tier}]  {r.display}"
+        star_label = f"{r.star}-star" if isinstance(r.star, int) else "ITEM   "
+        label = f"  {star_label}  [{tier}]  {r.display}"
         if r.adjusted != r.points and not r.unrated:
             label += f"  ({r.points:.1f} -> {r.adjusted:.1f} in context)"
         out.append(label)
@@ -1001,15 +1199,25 @@ def build_parser():
                     "NPC vendor sell a Fallout 76 legendary item.",
         epilog=textwrap.dedent("""\
             examples:
-              %(prog)s melee --one Juggernaut's --two Riposting --three Lightweight
-              %(prog)s ranged --one Quad --two Rapid --three "V.A.T.S. Optimized" --build commando --rate fast
-              %(prog)s armor --one Unyielding --two Luck --three Sentinel's --four Limit-Breaking --build bloodied vats
-              %(prog)s pa --one Overeater's --two Powered --three Thru-hiker's --json
+              %(prog)s melee --item "Super Sledge" --one Juggernaut's --two Riposting --three Lightweight
+              %(prog)s ranged --item "The Fixer" --one Quad --two Rapid --three "V.A.T.S. Optimized" --build commando --rate fast
+              %(prog)s armor --item "Secret Service Armor" --one Unyielding --two Luck --three Sentinel's --build bloodied vats
+              %(prog)s pa --item "Union Power Armor" --one Overeater's --two Powered --three Thru-hiker's --json
               %(prog)s --list armor 3
+              %(prog)s --list-items ranged
+
+            data files (auto-loaded from this script's own folder, no flag needed):
+              *legendary*mod*.txt   -> the legendary-effect tier list
+              *weapon*tier*.txt     -> the named-weapon tier list
+              *armor*tier*.txt      -> the named-armor/power-armor tier list
+            Override any of them with --moddata / --weapondata / --armordata.
             """),
     )
     p.add_argument("category", nargs="?",
                    help="ranged | melee | armor | pa")
+    p.add_argument("--item", help="the specific weapon/armor name, e.g. "
+                   "\"Super Sledge\" or \"Secret Service Armor\" - scored "
+                   "against the weapon/armor tier list alongside the roll")
     p.add_argument("--one", "-1", dest="one", help="1-star effect")
     p.add_argument("--two", "-2", dest="two", help="2-star effect")
     p.add_argument("--three", "-3", dest="three", help="3-star effect")
@@ -1023,10 +1231,18 @@ def build_parser():
                    help="effects you have NOT yet learned as craftable mods")
     p.add_argument("--scrip-capped", action="store_true",
                    help="you have hit the daily scrip limit")
-    p.add_argument("--tierfile", help="path to an updated tier-list file")
+    p.add_argument("--moddata", help="path to the legendary-mod tier-list "
+                   "file (default: auto-detected next to this script)")
+    p.add_argument("--tierfile", help=argparse.SUPPRESS)  # legacy alias for --moddata
+    p.add_argument("--weapondata", help="path to the weapon tier-list file "
+                   "(default: auto-detected next to this script)")
+    p.add_argument("--armordata", help="path to the armor/power-armor "
+                   "tier-list file (default: auto-detected next to this script)")
     p.add_argument("--json", action="store_true", help="machine-readable output")
     p.add_argument("--list", nargs=2, metavar=("CATEGORY", "STAR"),
-                   help="print the tier table for a category/star and exit")
+                   help="print the legendary-mod tier table for a category/star and exit")
+    p.add_argument("--list-items", metavar="CATEGORY",
+                   help="print the named-item tier table for a category and exit")
     return p
 
 
@@ -1034,10 +1250,23 @@ def main(argv=None):
     parser = build_parser()
     args = parser.parse_args(argv)
 
+    # --- locate data files: explicit flag > auto-detected next to the script ---
+    mod_path = args.moddata or args.tierfile or find_data_file(
+        SCRIPT_DIR, ["legendary", "mod"])
+    weapon_path = args.weapondata or find_data_file(
+        SCRIPT_DIR, ["weapon", "tier"], must_not_contain=["legendary"])
+    armor_path = args.armordata or find_data_file(
+        SCRIPT_DIR, ["armor", "tier"], must_not_contain=["legendary", "weapon"])
+
     try:
-        table, catchalls = load_table(args.tierfile)
+        table, catchalls = load_table(mod_path)
     except OSError as e:
-        parser.error(f"could not read tier file: {e}")
+        parser.error(f"could not read legendary-mod tier file: {e}")
+
+    try:
+        item_table, item_sources = load_item_tables([weapon_path, armor_path])
+    except OSError as e:
+        parser.error(f"could not read weapon/armor tier file: {e}")
 
     if args.list:
         cat_raw, star_raw = args.list
@@ -1047,6 +1276,13 @@ def main(argv=None):
         if not star_raw.isdigit() or not 1 <= int(star_raw) <= 4:
             parser.error("star must be 1-4")
         list_table(table, cat, int(star_raw))
+        return 0
+
+    if args.list_items:
+        cat = CATEGORY_ALIASES.get(args.list_items.lower().strip())
+        if not cat:
+            parser.error(f"unknown category '{args.list_items}'")
+        list_items(item_table, cat)
         return 0
 
     if not args.category:
@@ -1065,25 +1301,61 @@ def main(argv=None):
 
     supplied = [(1, args.one), (2, args.two), (3, args.three), (4, args.four)]
     supplied = [(s, v) for s, v in supplied if v]
-    if not supplied:
-        parser.error("give at least one of --one/--two/--three/--four")
+    if not supplied and not args.item:
+        parser.error("give --item and/or at least one of --one/--two/--three/--four")
 
-    resolved = [resolve(table, catchalls, category, star, name)
-                for star, name in supplied]
+    mod_resolved = [resolve(table, catchalls, category, star, name)
+                    for star, name in supplied]
 
-    market = score(resolved, use_adjusted=False)
-    apply_context(resolved, args.build, args.rate)
-    personal = score(resolved, use_adjusted=True)
+    item_resolved = resolve_item(item_table, category, args.item) if args.item else None
+
+    # The ITEM slot (which gun/armor this is) is scored alongside the mod
+    # rolls: it doesn't get build/rate context adjustments (no per-build
+    # weapon-type modeling here), so it contributes the same amount to both
+    # the market and personal-fit scores.
+    scored = ([item_resolved] if item_resolved else []) + mod_resolved
+
+    market = score(scored, use_adjusted=False)
+    apply_context(scored, args.build, args.rate)
+    personal = score(scored, use_adjusted=True)
 
     if market is None:
         market = personal = 0.0
 
+    # decide() narrates in terms of "effects", so it only sees the mod rolls;
+    # the item's contribution already lives inside personal/market above.
     action, confidence, reasons, alternates = decide(
-        resolved, personal, market, args, category)
+        mod_resolved, personal, market, args, category)
+
+    if item_resolved:
+        if item_resolved.unrated:
+            if item_resolved.notes:
+                reasons.append(f"Item: '{item_resolved.raw}' - {item_resolved.notes[0]}")
+        else:
+            name, tier = item_resolved.display, item_resolved.tier
+            if tier in ("S", "A"):
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a strong chassis worth building around "
+                               f"regardless of this specific roll.")
+            elif tier in ("D", "F"):
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a weak chassis, so even a great roll has "
+                               f"a low ceiling here.")
+            else:
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a solid, unremarkable chassis.")
 
     if args.json:
         print(json.dumps({
             "category": category,
+            "item": ({
+                "input": item_resolved.raw,
+                "resolved": item_resolved.display,
+                "tier": item_resolved.tier,
+                "points": item_resolved.points,
+                "unrated": item_resolved.unrated,
+                "notes": list(dict.fromkeys(item_resolved.notes)),
+            } if item_resolved else None),
             "roll": [{
                 "star": r.star,
                 "input": r.raw,
@@ -1094,7 +1366,7 @@ def main(argv=None):
                 "unrated": r.unrated,
                 "resolution": r.via,
                 "notes": list(dict.fromkeys(r.notes)),
-            } for r in resolved],
+            } for r in mod_resolved],
             "market_score": market,
             "personal_score": personal,
             "build": args.build,
@@ -1104,9 +1376,13 @@ def main(argv=None):
             "confidence": confidence,
             "reasons": reasons,
             "alternates": [ACTIONS[a] for a in alternates],
+            "data_sources": {
+                "legendary_mods": mod_path or "(embedded default)",
+                "weapon_armor_items": item_sources,
+            },
         }, indent=2))
     else:
-        print(render(category, resolved, personal, market, action,
+        print(render(category, scored, personal, market, action,
                      confidence, reasons, alternates, args))
     return 0
 

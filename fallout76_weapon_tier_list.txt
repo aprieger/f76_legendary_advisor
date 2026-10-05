@@ -1,0 +1,237 @@
+Fallout 76 Weapon Tier List — Update 70 / September 2026
+General PvE / endgame-oriented ranking.
+
+S = exceptional/top-tier
+A = excellent
+B = good/viable
+C = decent/situational
+D = weak/niche
+F = extremely weak/novelty
+
+Assumptions:
+- Max-level weapons and a reasonably optimized build.
+- Normal legendary effects are assumed; a perfect god roll can move a weapon up in practical value.
+- Ranking considers general PvE usefulness, DPS, VATS/crit potential, ammo economy, range, utility and ease of use.
+- Named unique weapons are included when they function as meaningful separate weapon variants.
+- Weapon skins that replaced former unique items are not treated as separate weapons.
+- This is a practical tier list, not a claim that every weapon within a tier is identical.
+
+Sources checked:
+- Bethesda Fallout 76: The Slasher / Update 70 release notes (September 15, 2026).
+- Fallout Wiki current weapon roster.
+- FO76DB current Update 70 ranged and melee tier references (September 2026).
+- Nukes & Dragons Fallout 76 database.
+
+[RANGED_WEAPONS]
+S|Enclave Plasma Gun|Exceptional DPS and flexibility; aligned auto with strong legendary effects remains an endgame staple.
+S|The Fixer|Excellent commando platform with strong stealth, VATS and critical performance.
+S|Handmade Rifle|Outstanding automatic rifle with excellent handling, damage and VATS efficiency.
+S|Railway Rifle|Extremely high single-target DPS and strong critical performance; ammo capacity was increased in Update 70.
+S|Plasma Caster|Huge per-shot damage, excellent ammo economy and strong heavy-gun performance.
+S|Holy Fire|Exceptionally strong sustained flamer damage with superb close-range DPS and healing utility through Friendly Fire.
+S|Cremator|Excellent area damage and damage-over-time pressure, especially against groups.
+S|Gatling Plasma|One of the strongest general-purpose heavy weapons for sustained damage.
+S|Gauss Minigun|Very high sustained damage with excellent heavy-gun scaling.
+S|Auto Grenade Launcher|Outstanding explosive area damage and crowd clearing.
+S|Compound Bow|Exceptional stealth/critical damage with excellent range and very efficient ammunition use.
+S|Bow|Excellent stealth damage and range; less raw damage than Compound Bow but still highly effective.
+S|Tesla Cannon|Very high explosive/energy damage with strong area damage and long-range utility.
+S|V63 Laser Carbine|Strong sustained energy damage and a distinctive overcharge playstyle.
+S|Cold Shoulder|One of the strongest shotguns because of its damage, freezing utility and excellent boss/group control.
+S|Gauss Shotgun|High burst damage and strong area damage when built around it.
+S|Flamer|Excellent close-range sustained damage and strong utility.
+S|.50 Cal Machine Gun|Reliable heavy gun with excellent sustained DPS and easy ammunition logistics.
+S|Gatling Gun|Exceptional ammo efficiency and strong sustained damage; ideal for everyday PvE.
+A|Gauss Rifle|Excellent single-shot/stealth rifle with very high per-shot damage.
+A|Alien Disintegrator|Strong energy rifle with good damage and useful receiver options.
+A|Alien Blaster|Excellent pistol damage, especially with optimized VATS/energy builds.
+A|10mm Submachine Gun|Very strong close-range automatic weapon with good VATS performance.
+A|Laser Gun|Strong automatic energy rifle with flexible configurations.
+A|Ultracite Laser Gun|Fast-firing energy rifle with good DPS, especially with optimized receivers.
+A|Tesla Rifle|Excellent tagging and area damage; particularly useful in events.
+A|V63-BERTHA|Strong Tesla-based weapon with high fire rate and useful automatic/charge configurations.
+A|V63-OLGA|Strong laser platform with unusual projectile-refraction utility and solid automatic damage.
+A|V63-HELGA|Powerful Gatling Laser variant with strong sustained energy damage.
+A|Gatling Laser|Excellent sustained energy DPS and good heavy-gun handling.
+A|Ultracite Gatling Laser|Fast, reliable energy heavy gun with strong sustained output.
+A|Minigun|High sustained ballistic DPS and excellent crowd-clearing potential.
+A|Light Machine Gun|Very high ballistic DPS with good range, though ammunition can be demanding.
+A|Pepper Shaker|Unique shotgun/heavy hybrid with excellent crowd control and crippling potential.
+A|Cryolator|Strong utility weapon for slowing/freezing enemies, with respectable damage.
+A|Harpoon Gun|Very high single-shot damage and useful explosive/shotgun-style configurations.
+A|Missile Launcher|Strong explosive burst and good area damage, though ammo weight is a drawback.
+A|Hellstorm Missile Launcher|Flexible explosive weapon with strong area damage and elemental payload options.
+A|Broadsider|Good explosive damage and strong ammo efficiency for a launcher.
+A|M79 Grenade Launcher|Lightweight explosive weapon with good area damage and easy handling.
+A|Fat Man|Enormous burst and area damage; ammunition weight and overkill keep it below S.
+A|Nuka-Launcher|Excellent explosive launcher variant with Nuka-Quantum grenades and strong area damage.
+A|Overkill|Extremely powerful Fat Man variant with excellent burst damage.
+A|Bunker Buster|Strong missile launcher variant with excellent explosive radius.
+A|Grand Finale|Strong Broadsider variant with extra fire damage and good explosive utility.
+A|The Dragon|Very high burst damage from its multiple black-powder projectiles; slow reload limits sustained DPS.
+A|Black Powder Rifle|Excellent stealth/critical burst damage, but very slow reload.
+A|Black Powder Blunderbuss|Strong close-range black-powder burst, with severe reload limitations.
+A|Gauss Pistol|High-damage pistol with strong charged shots and good VATS potential.
+A|Crusader Pistol|Versatile pistol with multiple elemental receiver choices.
+A|Gamma Gun|Specialized radiation damage and excellent anti-player utility; situational in ordinary PvE.
+A|Thirst Zapper|Very flexible novelty weapon platform with surprisingly useful explosive configurations.
+B|Combat Rifle|Solid automatic rifle platform and a good lower-tier commando option.
+B|Assault Rifle|Reliable automatic rifle with good handling, though generally outperformed by Fixer/Handmade.
+B|Radium Rifle|Good automatic rifle with useful radiation damage and strong stealth/commando potential.
+B|Lever Action Rifle|Strong precision rifle with good range and VATS; Update 70 increased its magazine to six.
+B|Hunting Rifle|High per-shot damage and good range, but slow compared with modern alternatives.
+B|Combat Shotgun|Solid general shotgun with good automatic options.
+B|Pump Action Shotgun|Dependable shotgun with good damage and broad mod availability.
+B|Double-Barrel Shotgun|Excellent burst damage but limited magazine and reload speed.
+B|Submachine Gun|Good automatic DPS and handling, but weaker than top commando platforms.
+B|Pipe Gun|Cheap and flexible, with surprisingly good performance when fully optimized.
+B|Pipe Revolver|Respectable early/mid-game pistol/rifle platform but limited endgame DPS.
+B|Pipe Bolt-Action|Good precision option while leveling, but outclassed at endgame.
+B|10mm Pistol|Reliable pistol with strong early-game performance and good automatic/semi-auto options.
+B|.44 Pistol|High single-shot pistol damage, but slow and AP-hungry compared with stronger pistols.
+B|Western Revolver|Good raw pistol damage with strong VATS potential, but slow rate of fire.
+B|Single Action Revolver|High damage per shot but extremely slow reload and fire rate.
+B|Salvaged Assaultron Head|Huge burst potential, but charge time and radiation drawbacks make it niche.
+B|Syringer|Excellent utility platform because of its special syringes; poor as a conventional damage weapon.
+B|Crossbow|Good stealth damage and utility, especially with elemental bolts.
+C|Flare Gun|Primarily a utility/roleplay weapon rather than a serious damage platform.
+C|Pipe Pistol|Very accessible and cheap, but weak compared with most endgame pistols.
+C|Black Powder Pistol|Strong burst for a pistol but severely constrained by reload time.
+
+# Named unique variants
+A|Medical Malpractice|Strong .44 pistol variant with useful critical-oriented effects; still limited by the pistol platform.
+A|Somerset Special|Excellent leveling pistol with strong distant-target damage; less competitive at endgame.
+A|The Fact Finder|Good .44 pistol variant with useful weak-point damage while aiming.
+B|Voice of Set|Solid .44 pistol variant with useful anti-robot utility.
+B|Anti-Scorched Training Pistol|Useful early-game .44 pistol variant, but its Scorched specialization limits general use.
+A|Circuit Breaker|Strong 10mm pistol variant with excellent explosive utility and good VATS performance.
+S|The V.A.T.S. Unknown|Excellent Alien Blaster variant whose VATS critical effect can produce enormous burst damage.
+A|Zeta's Revenge|Strong Alien Blaster variant with useful critical potential.
+A|Pirate Punch|Strong black-powder blunderbuss variant with an unusual lockpicking-based damage bonus.
+B|Xerxo's Gamma Ray Gun|Specialized Gamma Gun variant that adds radiation to its attacks; niche but useful.
+B|Polly's Assaultron Head|Strong burst Assaultron Head variant with the platform's normal charging limitations.
+B|Sheepsquatch Assaultron Head|Specialized Assaultron Head variant with limited general-purpose use.
+A|Crowd Control|Strong Combat Shotgun variant with additional bleed damage.
+A|Salt of the Earth|Strong Double-Barrel Shotgun variant with useful legendary effects.
+A|Civil Unrest|Good Pump Action Shotgun variant with a large AP bonus.
+A|The Kabloom|Good Pump Action Shotgun variant with poison/explosive utility.
+A|Foundations Vengeance|Excellent Minigun variant that becomes especially dangerous at low health.
+A|Final Word|Strong .50 Cal Machine Gun variant with Bullet Storm synergy.
+A|Red Terror|Strong LMG variant with additional fire damage.
+A|Ticket to Revenge|Strong Railway Rifle variant with escalating armor penetration through Onslaught.
+A|Anchorage Ace|Strong 10mm SMG variant with an integrated-silencer-style stealth advantage.
+A|Perfect Storm|Useful 10mm SMG variant with fire damage.
+A|Love Tap|Good Combat Rifle variant with team damage support after bashing.
+A|Elder's Mark|Strong Submachine Gun variant with excellent automatic-weapon handling.
+A|Shattered Grounds|Strong Handmade Rifle variant with additional bleed damage.
+A|Doctors Orders|Good Hunting Rifle variant with a useful revive-cooldown effect.
+A|Western Spirit|Good Lever Action Rifle variant with a Gunslinger perk bonus.
+A|Gunther's Big Iron|Strong Single Action Revolver variant with a major reload-speed bonus.
+A|Daisycutter|Powerful Fat Man variant that scales with radiation resistance.
+A|Pyrolyzer|Useful flamer variant with additional burning effects.
+A|Peacemaker|Strong launcher variant with charisma-scaled explosive damage.
+A|Resolve Breaker|Useful launcher variant with fire/cryogenic grenade behavior.
+A|The Guarantee|Very strong Daily Ops mini-nuke launcher variant with a sniper-style damage option.
+[MELEE_WEAPONS]
+S|War Glaive|Exceptional two-handed melee platform with powerful elemental mods and excellent damage.
+S|Oathbreaker|War Glaive unique with an excellent legendary effect; Update 70 allows unique weapons to be re-legendary crafted.
+S|Unstoppable Monster|Exceptional unarmed weapon with strong damage reduction and kill-streak utility.
+S|Sheepsquatch Club|Top-tier one-handed option with strong elemental damage and excellent special mods.
+S|Plasma Cutter|Outstanding one-handed energy melee weapon with excellent damage.
+S|Whacker Smacker|Very strong Super Sledge variant that scales exceptionally with Onslaught and power attacks.
+S|Super Sledge|One of the strongest straightforward two-handed melee weapons; excellent damage with strong elemental mods.
+S|Ultracite Terror Sword|Very high poison-focused damage and excellent raw performance.
+S|Electro Enforcer|Strong one-handed energy melee weapon with valuable poison and cryogenic modification options.
+S|Gulper Smacker|Excellent two-handed weapon with strong damage and exceptional synergy with its special buff.
+A|Grognak's Axe|High-damage two-handed weapon with good swing characteristics, though it lacks modern mod flexibility.
+A|Blue Ridge Branding Iron|Very fast melee weapon with strong fire damage and excellent Friendly Fire utility.
+A|Hog Splitter|Solid high-damage two-handed weapon with poison and other useful mod choices.
+A|V63 Zweihaender|Strong two-handed weapon with energy damage and good raw damage; now craftable after the Skyline Valley quest.
+A|V63 Shock Baton|Strong energy melee variant with useful damage profile.
+A|Deathclaw Gauntlet|Reliable unarmed weapon with strong damage and excellent legendary potential.
+A|Drill Fist|Very strong unarmed unique with high sustained damage.
+A|Face Breaker|Strong Power Fist variant with excellent unarmed performance.
+A|Power Fist|One of the best conventional unarmed platforms with high damage and strong mods.
+A|Gauntlet|Strong unarmed platform with good damage and bleed potential.
+A|Auto Axe|Still capable of excellent sustained damage despite the major reduction in attack speed from earlier eras.
+A|Chainsaw|Excellent sustained melee damage with easy close-range use.
+A|Super Slasher|Strong chainsaw/auto-weapon variant with bleed utility.
+A|Cauterizer|Excellent chainsaw variant with strong healing/support utility.
+A|Tenderizer|Strong two-handed weapon with useful elemental modifications and good damage.
+A|Sheepsquatch Staff|Strong two-handed option with elemental damage and good raw performance.
+A|War Drum|Respectable two-handed weapon with solid damage, though slower than top options.
+A|Baseball Bat|Good two-handed weapon with an enormous mod selection and respectable damage.
+A|Chinese Officer Sword|Fast one-handed sword with good elemental/bleed options.
+A|Assaultron Blade|Reliable one-handed energy blade with good damage and legendary potential.
+A|Cultist Blade|Fast one-handed weapon with strong basic DPS.
+A|Combat Knife|Very fast one-handed weapon with excellent AP efficiency and stealth compatibility.
+A|Switchblade|Extremely fast melee weapon with excellent AP efficiency.
+A|Death Tambo|Fast unarmed weapon with useful new blade/sharp mods.
+A|Mole Miner Gauntlet|Good unarmed damage with straightforward gameplay.
+B|Bear Arm|Solid unarmed weapon with respectable damage and useful mods.
+B|Ogua Gauntlet|Good defensive/utility-oriented unarmed variant, but less compelling for pure DPS.
+B|Boxing Glove|Fast unarmed option with good AP efficiency.
+B|Knuckles|Very fast unarmed weapon with excellent AP economy.
+B|Meat Hook|Fast unarmed weapon with good utility, though damage is below the best unarmed choices.
+B|Mr. Handy Buzz Blade|Fast sustained melee option with decent damage.
+B|Shishkebab|Good fire melee weapon with excellent Friendly Fire utility.
+B|Cattleprod|Good one-handed energy melee option with solid damage.
+B|Revolutionary Sword|Fast one-handed sword with useful damage and stealth characteristics.
+B|Ski Sword|Good one-handed sword with respectable damage and strong legendary potential.
+B|Machete|Solid early/endgame one-handed option with useful elemental mods.
+B|Sickle|Fast, efficient one-handed melee weapon.
+B|Bowie Knife|Very fast stealth-friendly weapon with strong AP efficiency.
+B|Cultist Dagger|Fast stealth melee weapon with solid DPS.
+B|Baton|Fast one-handed blunt weapon with unusually low AP cost.
+B|Ripper|Very fast sustained melee weapon with strong DPS when properly built.
+B|Drill|Fast sustained damage with low AP cost, though lower ceiling than chainsaws/auto axes.
+B|Pipe Wrench|Flexible one-handed weapon with useful mods and decent damage.
+B|Hatchet|Fast one-handed weapon with respectable damage.
+B|Shepherd's Crook|Good two-handed utility weapon, especially for its special functions.
+B|Pole Hook|Solid two-handed melee damage with useful reach.
+B|Spear|Good reach and respectable damage, with a strong unique variant.
+B|Fire Axe|High per-hit damage and good bleed/fire modification potential.
+B|Bone Hammer|Solid two-handed damage but slower and less flexible than top choices.
+B|Bone Club|Simple, dependable one-handed blunt weapon.
+B|Golf Club|Fast enough and easy to use, but lacks endgame advantages.
+B|Multi-Purpose Axe|Good two-handed damage and useful mod options.
+B|Pickaxe|Utility-focused melee weapon with respectable damage.
+B|Shovel|Useful utility weapon with decent melee performance.
+C|Board|Basic two-handed weapon with low damage ceiling.
+C|Lead Pipe|Cheap and accessible but weak at endgame.
+C|Tire Iron|Basic one-handed weapon with limited endgame potential.
+C|Walking Cane|Primarily utility/roleplay; mediocre combat performance.
+C|Rolling Pin|Low-damage novelty weapon with limited endgame value.
+C|Pitchfork|Decent reach but poor damage compared with better two-handed weapons.
+C|Pool Cue|Serviceable early weapon but weak at endgame.
+C|Protest Sign|Novelty weapon with low damage.
+C|Guitar Sword|Fun weapon with limited damage and mod flexibility.
+C|Commie Whacker|Novelty weapon; useful mostly for challenges and roleplay.
+C|Paddle Ball|Novelty weapon with very limited combat value.
+D|Metal Pipe|Low damage and little endgame specialization.
+D|Mole Rat Bat|Specialized unique weapon with useful anti-molerat damage but little general value.
+# Named unique variants
+A|All Rise|Strong Super Sledge variant with extra health; good straightforward heavy melee.
+A|Ad Victoriam|Essentially a Super Sledge variant; solid but not meaningfully above the base platform.
+A|The Debilitator|Strong Super Sledge variant with extra limb damage.
+A|The Farmhand|Strong Super Sledge variant that scales melee damage with Endurance.
+A|Black Diamond|Good Ski Sword variant with cryogenic damage.
+A|Blade of Bastet|Strong Chinese Officer Sword variant with improved armor penetration.
+A|Grant's Saber|Useful Chinese Officer Sword variant with good damage and historical novelty.
+A|Meteoritic Sword|Strong Chinese Officer Sword variant with useful legendary effects.
+A|The Gutter|Good Assaultron Blade variant with poison damage, though poison alone does not make it top tier.
+A|Disorderly Conduct|Useful Baton variant with extra utility, but not a top damage platform.
+A|Cryptid Jawbone Knife|Strong Combat Knife variant with a large cryptid-damage bonus.
+A|The Invader|Fast Combat Knife variant with excellent basic handling.
+A|Nailer|Cultist Blade variant with a block-related effect; niche outside specialized play.
+A|The Quick Fix|Very fast Switchblade variant, though its upside requires accepting addiction.
+A|Luca's Switchblade|Fast Switchblade variant with solid close-range performance.
+A|Mechanic's Best Friend|Useful Pipe Wrench variant with strong utility but modest damage.
+A|Relic Reaper|Strong specialized melee weapon with a random collection-perk effect.
+A|Head Hunter Scythe|Strong Pickaxe variant with excellent bleed damage.
+A|Cultist Piercer|Good Pickaxe variant with cryptid-focused utility.
+A|Super Stimpak|Good Spear variant with healing utility.
+A|Super Stimpike|Good Spear variant that can heal friendly targets.
+A|Tone Death|Strong Death Tambo variant with additional damage while Well Tuned.
+A|Commander’s Charge|Strong Revolutionary Sword variant with useful legendary effects.
+A|Meteorite Sword|Strong sword variant with good damage.
