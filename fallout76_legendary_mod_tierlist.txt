@@ -1,0 +1,217 @@
+FALLOUT 76 LEGENDARY MOD TIER LIST
+Purpose: Program-readable reference for evaluating legendary effects.
+Tier meanings:
+S = extremely desirable / commonly part of top-end builds
+A = excellent / generally worth keeping
+B = good but situational
+C = usable but usually replaceable
+D = niche / mostly convenience
+F = generally not worth keeping
+
+NOTE: Effect value is weapon/build dependent. This file provides general community-opinion tiers, not absolute rankings.
+
+[RANGED_WEAPONS]
+[1_STAR]
+S|Quad|Large magazine increase; excellent on many automatic/rapid-fire weapons
+S|Anti-Armor|Strong general-purpose damage against high-resistance enemies
+S|Bloodied|Massive damage potential for low-health builds
+A|Vampire's|Excellent survivability on fast-firing weapons
+A|Aristocrat's|Up to +50% damage while maintaining high caps
+A|Two Shot|Strong on weapons where extra projectile works well
+A|Junkie's|Strong for deliberate addiction builds
+B|Instigating|Excellent for high single-shot/opening damage
+B|Executioner's|Strong against enemies below half health
+B|Furious|Good sustained single-target damage
+B|Juggernaut's|Useful full-health alternative
+C|Troubleshooter's|Excellent specifically against robots
+C|Ghoul Slayer's|Useful specifically against ghouls
+C|Mutant Slayer's|Useful specifically against Super Mutants
+C|Zealot's|Useful specifically against Scorched
+C|Hunter's|Useful specifically against Animals
+D|Assassin's|Primarily PvP/human-target focused
+D|Exterminator's|Very niche
+D|Nocturnal|Very situational
+D|Suppressor's|Defensive utility generally less valuable than damage
+
+[2_STAR]
+S|Explosive|Excellent on compatible weapons; strong general utility
+S|Rapid|Faster fire rate is excellent on automatic weapons
+S|Vital|+50% critical damage; very strong for VATS crit builds
+A|V.A.T.S. Enhanced|Excellent for VATS-focused weapons
+A|Heavy Hitter's|Excellent where applicable
+B|Hitman's|Good for aiming-down-sights builds
+B|Crippling|Useful utility
+B|Inertial|Useful VATS/AP utility
+C|Last Shot|Highly weapon dependent
+D|Basher's|Mostly bash-oriented builds
+D|Pickpocketer's|Mostly utility/gimmick
+
+[3_STAR]
+S|V.A.T.S. Optimized|AP cost reduction is excellent for VATS weapons
+S|Swift|Excellent sustained-combat utility
+A|Lucky Hit|Excellent VATS utility
+A|Lightweight|Strong convenience/weight reduction
+A|Durability|Excellent quality of life
+B|Nimble|Good mobility
+B|Ghost's|Useful defensive utility
+B|Resilient|Situational survivability
+C|SPECIAL stat effects|Useful depending on build
+D|Other niche effects|Situational
+
+[MELEE_WEAPONS]
+[1_STAR]
+S|Anti-Armor|Excellent general-purpose damage
+S|Bloodied|Massive low-health damage
+A|Vampire's|Excellent survivability with rapid attacks
+A|Aristocrat's|Excellent full-health damage option
+A|Junkie's|Strong if maintaining addictions
+A|Instigating|Excellent for huge single-hit attacks
+B|Furious|Good sustained single-target damage
+B|Executioner's|Strong against wounded targets
+B|Juggernaut's|Decent full-health option
+C|Quad|Generally much less useful on melee
+D|Hunter's|Useful specifically against Animals
+D|Enemy-specific effects|Specialized use
+
+[2_STAR]
+S|Rapid|Faster swing speed is a classic melee god-roll effect
+S|Heavy Hitter's|Excellent melee damage
+A|Strength|Excellent melee stat boost
+A|V.A.T.S. Enhanced|Useful for VATS melee
+B|Crippling|Useful utility
+B|Inertial|AP utility
+C|Explosive|Highly weapon-specific
+F|Riposting|Generally niche
+
+[REGULAR_ARMOR]
+[1_STAR]
+S|Unyielding|Defining effect for low-health builds; major SPECIAL utility
+S|Overeater's|Premier full-health defensive choice
+A|Aristocrat's|Strong with high caps
+A|Troubleshooter's|Strong specialized defensive set
+B|Bolstering|Useful defensive option
+B|Life Saving|Useful survivability
+B|Weightless|Useful for specific stealth/utility setups
+B|Chameleon|Good stealth utility
+C|Vanguard's|Usable but generally below top choices
+C|Mutant's|Useful in some builds
+D|Enemy-specific effects|Specialized use
+
+[2_STAR]
+S|Powered|Action Point regeneration
+A|Intelligence|Excellent for XP/leveling
+A|Strength|Excellent for carry weight/melee
+A|Luck|Strong for VATS crit builds
+A|Endurance|Strong survivability
+B|Agility|Useful AP/stealth utility
+B|Poisoner's|Useful against poison-heavy content
+B|Fireproof|Useful defensive specialization
+C|Perception|Build dependent
+C|Charisma|Mostly team/support utility
+D|Antiseptic|Only protects against environmental disease sources
+D|Other effects|Niche
+
+[3_STAR]
+S|Sentinel's|Strong defensive effect when standing still
+S|Arms Keeper's|Excellent weapon-weight reduction
+A|Thru-hiker's|Major perk-card savings for food/drink/chem weight
+A|Acrobat's|Excellent quality of life, especially with jetpacks
+A|Secret Agent's|Strong stealth utility
+A|Cavalier's|Strong for players who move/sprint frequently
+B|Pack Rat's|Great for junk-heavy characters
+B|Belted|Good for ammo-heavy characters
+B|Doctor's|Useful convenience
+B|Durability|Good general-purpose option
+C|Safecracker's|Niche
+D|Frozen|5% is an extremely low proc chance, and you're only getting the effect when you're hit by a melee attacker
+D|Other effects|Highly specialized
+
+[POWER_ARMOR]
+[1_STAR]
+S|Overeater's|Premier general-purpose defensive choice
+A|Troubleshooter's|Excellent for robot-heavy encounters
+A|Aristocrat's|Good general-purpose alternative with high caps
+B|Bolstering|Useful defensive option
+B|Vanguard's|Usable but generally less attractive
+B|Ghoul Slayer's|excellent dedicated ghoul protection
+C|Enemy-specific effects|Excellent only in appropriate situations
+C|Auto-Stim|Useful in specific situations, but generally not worth spending a valuable 1 star slot on for an optimized PA set.
+D|Cloaking|Power Armor already has substantial stealth disadvantages.
+D|Other effects|Limited value
+
+[2_STAR]
+S|Powered|Action Point regeneration
+A|Intelligence|Excellent for XP
+A|Strength|Carry weight/melee
+A|Endurance|Survivability
+A|Luck|VATS builds
+B|Poisoner's|Useful against poison-heavy encounters
+B|Fireproof|Useful defense
+C|Other SPECIAL effects|Build dependent
+
+[3_STAR]
+S|Thru-hiker's|Can eliminate substantial perk investment
+S|Arms Keeper's|Excellent for weapon-heavy characters
+A|Pack Rat's|Excellent for junk-heavy characters
+A|Belted|Excellent for ammo-heavy characters
+A|Acrobat's|Especially useful with jetpack PA
+B|Sentinel's|Strong when stationary
+B|Durability|Good general-purpose option
+C|HazMat|Power Armor already has substantial radiation protection
+C|Other weight reductions|Useful depending on inventory
+
+[4_STAR_REGULAR_ARMOR]
+S|Limit-Breaking|Excellent VATS crit builds
+S|Rejuvenator's|Excellent personal/team sustain
+S|Ranger's|Major ranged damage boost
+A|Reflective|Strong defensive/offensive combination
+A|Scanner|Strong VATS utility
+A|Tanky's|Strong defensive option
+A|Stalwart|Strong team defense
+B|Sawbones|Good passive healing
+B|Runner's|Excellent mobility
+B|Miasma's|Niche offensive utility
+B|Aegis|Team-oriented defense
+C|Propelling|Mobility; build dependent
+C|Battle-Loader's|Weapon-specific utility
+D|Choo-Choo's|Mostly gimmick
+
+[4_STAR_POWER_ARMOR]
+S|Rejuvenator's|Outstanding sustain and team support
+S|Reflective|Strong defensive/offensive effect
+S|Ranger's|Excellent ranged PA damage option
+A|Aegis|Strong team defensive aura
+A|Scanner|Excellent VATS PA utility
+A|Limit-Breaking|Excellent crit-oriented option
+A|Stalwart|Strong team defense
+B|Propelling|Great movement
+B|Radioactive-Powered|Strong AP regeneration with radiation tradeoff
+B|Tanky's|Strong defensive choice
+B|Runner's|Great mobility
+B|Sawbones|Passive healing
+C|Miasma's|Situational
+D|Choo-Choo's|Mostly fun/gimmick
+
+[QUICK_KEEP_LIST]
+RANGED_1_STAR|Quad|Anti-Armor|Bloodied|Vampire's|Aristocrat's|Two Shot
+RANGED_2_STAR|Explosive|Rapid|Vital
+RANGED_3_STAR|V.A.T.S. Optimized|Swift|Lucky Hit|Lightweight|Durability
+MELEE_1_STAR|Anti-Armor|Bloodied|Vampire's|Aristocrat's|Instigating
+MELEE_2_STAR|Rapid|Heavy Hitter's|Strength
+ARMOR_1_STAR|Unyielding|Overeater's|Aristocrat's|Troubleshooter's
+ARMOR_2_STAR|Powered|Intelligence|Strength|Luck
+ARMOR_3_STAR|Sentinel's|Arms Keeper's|Thru-hiker's|Acrobat's
+POWER_ARMOR_1_STAR|Overeater's|Troubleshooter's|Aristocrat's
+POWER_ARMOR_2_STAR|Powered|Intelligence|Strength|Endurance|Luck
+POWER_ARMOR_3_STAR|Thru-hiker's|Arms Keeper's|Acrobat's
+FOUR_STAR|Rejuvenator's|Reflective|Ranger's|Limit-Breaking|Scanner|Aegis|Stalwart|Tanky's|Radioactive-Powered|Runner's
+
+[PROGRAMMING_NOTES]
+- Treat tiers as general community-opinion priors, not universal rankings.
+- Evaluate complete legendary combinations when possible.
+- Weapon-specific effects can change value substantially.
+- Quad is much more valuable on many rapid-fire weapons than on slow single-shot weapons.
+- Instigating is more valuable on high-damage single-shot weapons.
+- Vampire's is more valuable as weapon fire/attack rate increases.
+- Unyielding is primarily a low-health armor effect.
+- Overeater's is a primary full-health defensive effect for armor and power armor.
