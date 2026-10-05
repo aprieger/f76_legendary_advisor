@@ -1218,10 +1218,11 @@ def build_parser():
     p.add_argument("--item", help="the specific weapon/armor name, e.g. "
                    "\"Super Sledge\" or \"Secret Service Armor\" - scored "
                    "against the weapon/armor tier list alongside the roll")
-    p.add_argument("--one", "-1", dest="one", help="1-star effect")
-    p.add_argument("--two", "-2", dest="two", help="2-star effect")
-    p.add_argument("--three", "-3", dest="three", help="3-star effect")
-    p.add_argument("--four", "-4", dest="four", help="4-star effect (armor / power armor)")
+    p.add_argument("--one", "--1", "-1", dest="one", help="1-star effect")
+    p.add_argument("--two", "--2", "-2", dest="two", help="2-star effect")
+    p.add_argument("--three", "--3", "-3", dest="three", help="3-star effect")
+    p.add_argument("--four", "--4", "-4", dest="four",
+                   help="4-star effect (armor / power armor)")
     p.add_argument("--build", nargs="*", default=[],
                    metavar="TAG",
                    help="build tags: " + ", ".join(sorted(BUILDS)))
