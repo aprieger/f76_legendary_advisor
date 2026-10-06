@@ -988,7 +988,7 @@ ACTIONS = {
 }
 
 
-def decide(resolved, personal, market, args, category):
+def decide(resolved, personal, market, category, unlearned=None, scrip_capped=False):
     """Return (action_key, confidence, reasons[], alternates[])."""
     reasons, alternates = [], []
     rated = [r for r in resolved if not r.unrated and r.effect]
@@ -1003,7 +1003,7 @@ def decide(resolved, personal, market, args, category):
     has_S = "S" in tiers
     has_SA = has_S or "A" in tiers
     slots_given = len(resolved)
-    unlearned = {norm(x) for x in (args.unlearned or [])}
+    unlearned = {norm(x) for x in (unlearned or [])}
     unlearned_hits = [r for r in rated
                       if norm(r.effect.name) in unlearned and r.tier in ("S", "A")]
 
@@ -1061,7 +1061,7 @@ def decide(resolved, personal, market, args, category):
         reasons.append(f"Desirability {market}/100 - middling. One good effect "
                        f"({best.display}, {best.tier}-tier) but the roll as a "
                        f"whole is not a keeper.")
-        if args.scrip_capped:
+        if scrip_capped:
             reasons.append("You are scrip-capped, so list it cheap in your CAMP "
                            "instead of burning the exchange on it.")
             return ("CAMP", "medium", reasons, ["EXCHANGE"])
@@ -1077,7 +1077,7 @@ def decide(resolved, personal, market, args, category):
     # --- Junk --------------------------------------------------------------
     reasons.append(f"Desirability {market}/100 - junk roll; every effect is "
                    f"C-tier or below.")
-    if slots_given <= 1 or args.scrip_capped:
+    if slots_given <= 1 or scrip_capped:
         reasons.append("A 1-star junk item returns very little scrip, so caps "
                        "from an NPC vendor are the better trade."
                        if slots_given <= 1 else
@@ -1107,7 +1107,7 @@ def wrap(text, indent="    ", width=68, hang=0):
 
 
 def render(category, resolved, personal, market, action, confidence,
-           reasons, alternates, args):
+           reasons, alternates, build=None):
     out = []
     out.append(BAR)
     out.append(f" FALLOUT 76 LEGENDARY ADVISOR - {CATEGORY_LABEL[category]}")
@@ -1134,8 +1134,8 @@ def render(category, resolved, personal, market, action, confidence,
     out.append("")
     out.append(" SCORES")
     fit_label = "Personal fit"
-    if args.build:
-        fit_label += f" ({', '.join(args.build)})"
+    if build:
+        fit_label += f" ({', '.join(build)})"
     width = max(21, len(fit_label))
     out.append(f"    {'Market desirability':<{width}} {market:>5}/100  "
                f"{bar_for(market)}")
@@ -1165,6 +1165,107 @@ def render(category, resolved, personal, market, action, confidence,
         out.append(wrap("- " + n, indent="    ", hang=2))
     out.append(BAR)
     return "\n".join(out)
+
+
+class EvalResult:
+    """Everything a caller (CLI printer or GUI) needs to display one run."""
+    def __init__(self, category, scored, mod_resolved, item_resolved,
+                 market, personal, action, confidence, reasons, alternates,
+                 build, rate):
+        self.category = category
+        self.scored = scored
+        self.mod_resolved = mod_resolved
+        self.item_resolved = item_resolved
+        self.market = market
+        self.personal = personal
+        self.action = action
+        self.confidence = confidence
+        self.reasons = reasons
+        self.alternates = alternates
+        self.build = build
+        self.rate = rate
+
+    def as_text(self):
+        return render(self.category, self.scored, self.personal, self.market,
+                      self.action, self.confidence, self.reasons,
+                      self.alternates, self.build)
+
+    def as_json(self, mod_path=None, item_sources=None):
+        ir = self.item_resolved
+        return json.dumps({
+            "category": self.category,
+            "item": ({
+                "input": ir.raw, "resolved": ir.display, "tier": ir.tier,
+                "points": ir.points, "unrated": ir.unrated,
+                "notes": list(dict.fromkeys(ir.notes)),
+            } if ir else None),
+            "roll": [{
+                "star": r.star, "input": r.raw, "effect": r.display,
+                "tier": r.tier, "base_points": r.points,
+                "adjusted_points": round(r.adjusted, 2), "unrated": r.unrated,
+                "resolution": r.via, "notes": list(dict.fromkeys(r.notes)),
+            } for r in self.mod_resolved],
+            "market_score": self.market, "personal_score": self.personal,
+            "build": self.build, "rate": self.rate,
+            "action": self.action, "action_text": ACTIONS[self.action],
+            "confidence": self.confidence, "reasons": self.reasons,
+            "alternates": [ACTIONS[a] for a in self.alternates],
+            "data_sources": {
+                "legendary_mods": mod_path or "(embedded default)",
+                "weapon_armor_items": item_sources or [],
+            },
+        }, indent=2)
+
+
+def evaluate(table, catchalls, item_table, category, item_name=None,
+            one=None, two=None, three=None, four=None,
+            build=None, rate=None, unlearned=None, scrip_capped=False):
+    """Core scoring pipeline, independent of argparse or any UI. Raises
+    ValueError if neither an item nor any mod slot was supplied."""
+    build = build or []
+    unlearned = unlearned or []
+
+    supplied = [(1, one), (2, two), (3, three), (4, four)]
+    supplied = [(s, v) for s, v in supplied if v]
+    if not supplied and not item_name:
+        raise ValueError("give an item and/or at least one mod slot")
+
+    mod_resolved = [resolve(table, catchalls, category, star, name)
+                    for star, name in supplied]
+    item_resolved = resolve_item(item_table, category, item_name) if item_name else None
+
+    scored = ([item_resolved] if item_resolved else []) + mod_resolved
+    market = score(scored, use_adjusted=False)
+    apply_context(scored, build, rate)
+    personal = score(scored, use_adjusted=True)
+    if market is None:
+        market = personal = 0.0
+
+    action, confidence, reasons, alternates = decide(
+        mod_resolved, personal, market, category,
+        unlearned=unlearned, scrip_capped=scrip_capped)
+
+    if item_resolved:
+        if item_resolved.unrated:
+            if item_resolved.notes:
+                reasons.append(f"Item: '{item_resolved.raw}' - {item_resolved.notes[0]}")
+        else:
+            name, tier = item_resolved.display, item_resolved.tier
+            if tier in ("S", "A"):
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a strong chassis worth building around "
+                               f"regardless of this specific roll.")
+            elif tier in ("D", "F"):
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a weak chassis, so even a great roll has "
+                               f"a low ceiling here.")
+            else:
+                reasons.append(f"Platform: {name} is {tier}-tier on the community "
+                               f"list - a solid, unremarkable chassis.")
+
+    return EvalResult(category, scored, mod_resolved, item_resolved,
+                      market, personal, action, confidence, reasons,
+                      alternates, build, rate)
 
 
 def list_table(table, category, star):
@@ -1247,27 +1348,34 @@ def build_parser():
     return p
 
 
-def main(argv=None):
-    parser = build_parser()
-    args = parser.parse_args(argv)
-
-    # --- locate data files: explicit flag > auto-detected next to the script ---
-    mod_path = args.moddata or args.tierfile or find_data_file(
-        SCRIPT_DIR, ["legendary", "mod"])
-    weapon_path = args.weapondata or find_data_file(
+def load_all_data(mod_path=None, weapon_path=None, armor_path=None):
+    """Auto-detect (unless overridden) and load all three data files.
+    Returns (table, catchalls, item_table, mod_path_used, item_sources)."""
+    mod_path = mod_path or find_data_file(SCRIPT_DIR, ["legendary", "mod"])
+    weapon_path = weapon_path or find_data_file(
         SCRIPT_DIR, ["weapon", "tier"], must_not_contain=["legendary"])
-    armor_path = args.armordata or find_data_file(
+    armor_path = armor_path or find_data_file(
         SCRIPT_DIR, ["armor", "tier"], must_not_contain=["legendary", "weapon"])
 
-    try:
-        table, catchalls = load_table(mod_path)
-    except OSError as e:
-        parser.error(f"could not read legendary-mod tier file: {e}")
+    table, catchalls = load_table(mod_path)
+    item_table, item_sources = load_item_tables([weapon_path, armor_path])
+    return table, catchalls, item_table, mod_path, item_sources
 
+
+def main(argv=None):
+    raw_args = sys.argv[1:] if argv is None else argv
+    if not raw_args:
+        return run_gui()
+
+    parser = build_parser()
+    args = parser.parse_args(raw_args)
+
+    mod_override = args.moddata or args.tierfile
     try:
-        item_table, item_sources = load_item_tables([weapon_path, armor_path])
+        table, catchalls, item_table, mod_path, item_sources = load_all_data(
+            mod_override, args.weapondata, args.armordata)
     except OSError as e:
-        parser.error(f"could not read weapon/armor tier file: {e}")
+        parser.error(f"could not read a tier-list file: {e}")
 
     if args.list:
         cat_raw, star_raw = args.list
@@ -1300,91 +1408,227 @@ def main(argv=None):
             parser.error(f"unknown build tag '{b}'. Valid: "
                          + ", ".join(sorted(BUILDS)))
 
-    supplied = [(1, args.one), (2, args.two), (3, args.three), (4, args.four)]
-    supplied = [(s, v) for s, v in supplied if v]
-    if not supplied and not args.item:
-        parser.error("give --item and/or at least one of --one/--two/--three/--four")
-
-    mod_resolved = [resolve(table, catchalls, category, star, name)
-                    for star, name in supplied]
-
-    item_resolved = resolve_item(item_table, category, args.item) if args.item else None
-
-    # The ITEM slot (which gun/armor this is) is scored alongside the mod
-    # rolls: it doesn't get build/rate context adjustments (no per-build
-    # weapon-type modeling here), so it contributes the same amount to both
-    # the market and personal-fit scores.
-    scored = ([item_resolved] if item_resolved else []) + mod_resolved
-
-    market = score(scored, use_adjusted=False)
-    apply_context(scored, args.build, args.rate)
-    personal = score(scored, use_adjusted=True)
-
-    if market is None:
-        market = personal = 0.0
-
-    # decide() narrates in terms of "effects", so it only sees the mod rolls;
-    # the item's contribution already lives inside personal/market above.
-    action, confidence, reasons, alternates = decide(
-        mod_resolved, personal, market, args, category)
-
-    if item_resolved:
-        if item_resolved.unrated:
-            if item_resolved.notes:
-                reasons.append(f"Item: '{item_resolved.raw}' - {item_resolved.notes[0]}")
-        else:
-            name, tier = item_resolved.display, item_resolved.tier
-            if tier in ("S", "A"):
-                reasons.append(f"Platform: {name} is {tier}-tier on the community "
-                               f"list - a strong chassis worth building around "
-                               f"regardless of this specific roll.")
-            elif tier in ("D", "F"):
-                reasons.append(f"Platform: {name} is {tier}-tier on the community "
-                               f"list - a weak chassis, so even a great roll has "
-                               f"a low ceiling here.")
-            else:
-                reasons.append(f"Platform: {name} is {tier}-tier on the community "
-                               f"list - a solid, unremarkable chassis.")
+    try:
+        result = evaluate(table, catchalls, item_table, category,
+                          item_name=args.item, one=args.one, two=args.two,
+                          three=args.three, four=args.four, build=args.build,
+                          rate=args.rate, unlearned=args.unlearned,
+                          scrip_capped=args.scrip_capped)
+    except ValueError as e:
+        parser.error(str(e).replace(
+            "give an item and/or at least one mod slot",
+            "give --item and/or at least one of --one/--two/--three/--four"))
 
     if args.json:
-        print(json.dumps({
-            "category": category,
-            "item": ({
-                "input": item_resolved.raw,
-                "resolved": item_resolved.display,
-                "tier": item_resolved.tier,
-                "points": item_resolved.points,
-                "unrated": item_resolved.unrated,
-                "notes": list(dict.fromkeys(item_resolved.notes)),
-            } if item_resolved else None),
-            "roll": [{
-                "star": r.star,
-                "input": r.raw,
-                "effect": r.display,
-                "tier": r.tier,
-                "base_points": r.points,
-                "adjusted_points": round(r.adjusted, 2),
-                "unrated": r.unrated,
-                "resolution": r.via,
-                "notes": list(dict.fromkeys(r.notes)),
-            } for r in mod_resolved],
-            "market_score": market,
-            "personal_score": personal,
-            "build": args.build,
-            "rate": args.rate,
-            "action": action,
-            "action_text": ACTIONS[action],
-            "confidence": confidence,
-            "reasons": reasons,
-            "alternates": [ACTIONS[a] for a in alternates],
-            "data_sources": {
-                "legendary_mods": mod_path or "(embedded default)",
-                "weapon_armor_items": item_sources,
-            },
-        }, indent=2))
+        print(result.as_json(mod_path, item_sources))
     else:
-        print(render(category, scored, personal, market, action,
-                     confidence, reasons, alternates, args))
+        print(result.as_text())
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# 8. GUI (launched automatically when the script is run with no arguments)
+# ---------------------------------------------------------------------------
+
+def run_gui():
+    try:
+        import tkinter as tk
+        from tkinter import ttk, scrolledtext, messagebox
+    except ImportError:
+        print("No GUI available: this Python doesn't have tkinter installed.\n"
+              "On Debian/Ubuntu: sudo apt install python3-tk\n"
+              "On Fedora: sudo dnf install python3-tkinter\n"
+              "On Windows/macOS python.org installers, tkinter is included.\n\n"
+              "Run with arguments instead, e.g.:\n"
+              "  python f76_legendary_advisor.py melee --one Bloodied",
+              file=sys.stderr)
+        return 1
+
+    table, catchalls, item_table, mod_path, item_sources = load_all_data()
+
+    STAR_LABELS = {1: "1-star", 2: "2-star", 3: "3-star", 4: "4-star"}
+    CATEGORY_DISPLAY = ["Ranged weapon", "Melee weapon", "Armor", "Power armor"]
+    CATEGORY_DISPLAY_TO_KEY = {
+        "Ranged weapon": "RANGED_WEAPONS", "Melee weapon": "MELEE_WEAPONS",
+        "Armor": "REGULAR_ARMOR", "Power armor": "POWER_ARMOR",
+    }
+
+    def mod_names(category, star):
+        return sorted({e.name for e in table.get((category, star), {}).values()})
+
+    def item_names(category):
+        return sorted({e.name for e in item_table.get(category, {}).values()})
+
+    root = tk.Tk()
+    root.title("Fallout 76 Legendary Advisor")
+    root.geometry("980x760")
+    try:
+        root.minsize(860, 600)
+    except tk.TclError:
+        pass
+
+    style = ttk.Style()
+    try:
+        style.theme_use("clam")
+    except tk.TclError:
+        pass
+
+    main_pane = ttk.Panedwindow(root, orient="horizontal")
+    main_pane.pack(fill="both", expand=True, padx=8, pady=8)
+
+    form = ttk.Frame(main_pane, padding=10)
+    out_frame = ttk.Frame(main_pane, padding=(4, 10, 10, 10))
+    main_pane.add(form, weight=2)
+    main_pane.add(out_frame, weight=3)
+
+    row = 0
+
+    def add_label(text, r):
+        ttk.Label(form, text=text).grid(row=r, column=0, sticky="w", pady=(6, 0))
+
+    ttk.Label(form, text="Fallout 76 Legendary Advisor",
+              font=("TkDefaultFont", 13, "bold")).grid(
+        row=row, column=0, columnspan=2, sticky="w", pady=(0, 4))
+    row += 1
+    src_text = "legendary mods: " + (os.path.basename(mod_path) if mod_path else "(built-in default)")
+    if item_sources:
+        src_text += "  |  items: " + ", ".join(os.path.basename(p) for p in item_sources)
+    else:
+        src_text += "  |  items: (no weapon/armor file found - item scoring disabled)"
+    ttk.Label(form, text=src_text, foreground="#555",
+              font=("TkDefaultFont", 8), wraplength=380).grid(
+        row=row, column=0, columnspan=2, sticky="w", pady=(0, 10))
+    row += 1
+
+    add_label("Category", row)
+    category_var = tk.StringVar(value=CATEGORY_DISPLAY[0])
+    category_box = ttk.Combobox(form, textvariable=category_var,
+                                values=CATEGORY_DISPLAY, state="readonly", width=28)
+    category_box.grid(row=row, column=1, sticky="we", pady=(6, 0))
+    row += 1
+
+    add_label("Item (weapon/armor name)", row)
+    item_var = tk.StringVar()
+    item_box = ttk.Combobox(form, textvariable=item_var, width=28)
+    item_box.grid(row=row, column=1, sticky="we", pady=(6, 0))
+    row += 1
+
+    mod_vars, mod_boxes = {}, {}
+    for star in (1, 2, 3, 4):
+        add_label(f"{STAR_LABELS[star]} effect", row)
+        v = tk.StringVar()
+        box = ttk.Combobox(form, textvariable=v, width=28)
+        box.grid(row=row, column=1, sticky="we", pady=(6, 0))
+        mod_vars[star] = v
+        mod_boxes[star] = box
+        row += 1
+
+    add_label("Build tags (ctrl/cmd-click for several)", row)
+    row += 1
+    build_list = tk.Listbox(form, selectmode="multiple", height=6,
+                            exportselection=False)
+    for b in sorted(BUILDS):
+        build_list.insert("end", b)
+    build_list.grid(row=row, column=0, columnspan=2, sticky="we", pady=(0, 6))
+    row += 1
+
+    add_label("Weapon fire rate / attack speed", row)
+    rate_var = tk.StringVar(value="(none)")
+    rate_box = ttk.Combobox(form, textvariable=rate_var,
+                            values=["(none)", "slow", "medium", "fast"],
+                            state="readonly", width=28)
+    rate_box.grid(row=row, column=1, sticky="we", pady=(6, 0))
+    row += 1
+
+    add_label("Unlearned effects (comma-separated)", row)
+    unlearned_var = tk.StringVar()
+    ttk.Entry(form, textvariable=unlearned_var, width=30).grid(
+        row=row, column=1, sticky="we", pady=(6, 0))
+    row += 1
+
+    scrip_var = tk.BooleanVar(value=False)
+    ttk.Checkbutton(form, text="I'm scrip-capped today",
+                    variable=scrip_var).grid(
+        row=row, column=0, columnspan=2, sticky="w", pady=(10, 0))
+    row += 1
+
+    status_var = tk.StringVar(value="")
+    ttk.Label(form, textvariable=status_var, foreground="#b00020",
+              wraplength=380).grid(row=row, column=0, columnspan=2,
+                                   sticky="w", pady=(8, 0))
+    row += 1
+
+    btn_row = ttk.Frame(form)
+    btn_row.grid(row=row, column=0, columnspan=2, sticky="we", pady=(10, 0))
+    row += 1
+
+    form.columnconfigure(1, weight=1)
+
+    out_label = ttk.Label(out_frame, text="Result",
+                          font=("TkDefaultFont", 11, "bold"))
+    out_label.pack(anchor="w")
+    out_text = scrolledtext.ScrolledText(out_frame, wrap="word",
+                                         font=("Courier New", 10),
+                                         state="disabled")
+    out_text.pack(fill="both", expand=True, pady=(6, 0))
+
+    def set_output(text):
+        out_text.configure(state="normal")
+        out_text.delete("1.0", "end")
+        out_text.insert("1.0", text)
+        out_text.configure(state="disabled")
+
+    def refresh_choices(*_):
+        category = CATEGORY_DISPLAY_TO_KEY[category_var.get()]
+        item_box["values"] = item_names(category)
+        for star in (1, 2, 3, 4):
+            mod_boxes[star]["values"] = mod_names(category, star)
+
+    category_box.bind("<<ComboboxSelected>>", refresh_choices)
+    refresh_choices()
+
+    def do_evaluate():
+        status_var.set("")
+        category = CATEGORY_DISPLAY_TO_KEY[category_var.get()]
+        item_name = item_var.get().strip() or None
+        ones = {s: v.get().strip() or None for s, v in mod_vars.items()}
+        build = [build_list.get(i) for i in build_list.curselection()]
+        rate = rate_var.get()
+        rate = None if rate == "(none)" else rate
+        unlearned = [x.strip() for x in unlearned_var.get().split(",") if x.strip()]
+
+        try:
+            result = evaluate(table, catchalls, item_table, category,
+                              item_name=item_name, one=ones[1], two=ones[2],
+                              three=ones[3], four=ones[4], build=build,
+                              rate=rate, unlearned=unlearned,
+                              scrip_capped=scrip_var.get())
+        except ValueError:
+            status_var.set("Enter an item name and/or at least one mod effect first.")
+            return
+        set_output(result.as_text())
+
+    def do_clear():
+        item_var.set("")
+        for v in mod_vars.values():
+            v.set("")
+        build_list.selection_clear(0, "end")
+        rate_var.set("(none)")
+        unlearned_var.set("")
+        scrip_var.set(False)
+        status_var.set("")
+        set_output("")
+
+    ttk.Button(btn_row, text="Evaluate", command=do_evaluate).pack(
+        side="left")
+    ttk.Button(btn_row, text="Clear", command=do_clear).pack(
+        side="left", padx=(8, 0))
+
+    root.bind("<Return>", lambda e: do_evaluate())
+    set_output("Fill in an item and/or legendary effects on the left, "
+              "then click Evaluate (or press Enter).")
+
+    root.mainloop()
     return 0
 
 
