@@ -32,6 +32,13 @@ D|Assassin's|Primarily PvP/human-target focused
 D|Exterminator's|Very niche
 D|Nocturnal|Very situational
 D|Suppressor's|Defensive utility generally less valuable than damage
+A|Adrenal|Kill-streak scaling makes it a strong sustained-combat option, especially in high-density events
+D|Berserker's|Can provide solid damage but requires sacrificing armor/resistance, making it much less practical than top prefixes
+C|Gourmand's|Easy conditional damage when well fed and hydrated, but weaker than premier damage prefixes
+B|Lucid|Strong ghoul-oriented damage scaling tied to Feral meter; excellent in the right build but not universal
+B|Medic's|Useful team-support effect, though generally less desirable than direct damage or Vampire's for personal sustain
+S|Sniper's|Very large damage bonus against distant targets; premier choice for dedicated long-range/sniper builds
+D|Stalker's|Situational accuracy/stealth utility and generally outclassed by stronger damage prefixes
 
 [2_STAR]
 S|Explosive|Excellent on compatible weapons; strong general utility
@@ -44,7 +51,6 @@ B|Crippling|Useful utility
 B|Inertial|Useful VATS/AP utility
 C|Last Shot|Highly weapon dependent
 D|Basher's|Mostly bash-oriented builds
-D|Pickpocketer's|Mostly utility/gimmick
 
 [3_STAR]
 S|V.A.T.S. Optimized|AP cost reduction is excellent for VATS weapons
@@ -56,7 +62,23 @@ B|Nimble|Good mobility
 B|Ghost's|Useful defensive utility
 B|Resilient|Situational survivability
 C|SPECIAL stat effects|Useful depending on build
+C|Glowing|Build-enabling for Glow-focused ghoul setups but offers little to characters not using that system
+C|Steadfast|+50 damage resistance while aiming is useful survivability, but usually weaker than AP, reload, weight or durability effects
 D|Other niche effects|Situational
+
+[4_STAR]
+B|Bully's|Can scale to very high damage on crippled targets, but needs limb setup and is less immediate than top 4-star damage effects
+A|Conductor's|Critical hits provide health and AP sustain for the user and nearby teammates; excellent VATS/support utility
+C|Electrician's|Reload shockwave stun is useful crowd control but contributes little boss damage
+B|Encircler's|Up to +50% damage in crowded fights, but inconsistent against isolated bosses
+C|Fracturer's|Useful area damage from crippling limbs, but setup-dependent and weaker for single-target boss damage
+A|Pin-Pointer's|Reliable weak-point damage bonus with excellent boss and precision-weapon synergy
+S|Polished|Up to +60% weapon damage at high condition; one of the strongest broadly useful 4-star damage effects if maintained
+A|Pyromaniac's|Huge bonus damage against burning targets and easy to exploit on fire-oriented weapons/builds
+B|Stabilizer's|Large recoil/stability improvement is excellent QoL for manual aiming but provides no direct VATS damage
+A|Thrill-Seeker's|Kill-streak scaling to faster reload and melee attack speed is very strong in sustained combat
+A|Viper's|Huge bonus damage against poisoned targets; excellent when poison application is reliable
+A|Tarnished|Can reach extremely high bonus damage as weapon condition falls, but requires deliberately managing low durability
 
 [MELEE_WEAPONS]
 [1_STAR]
@@ -71,6 +93,11 @@ B|Executioner's|Strong against wounded targets
 B|Juggernaut's|Decent full-health option
 C|Quad|Generally much less useful on melee
 D|Hunter's|Useful specifically against Animals
+A|Adrenal|Kill-streak scaling makes it a strong sustained-combat option, especially in high-density events
+D|Berserker's|Can provide solid damage but requires sacrificing armor/resistance, making it much less practical than top prefixes
+A|Feral's|Strong for dedicated feral-ghoul melee setups, but niche outside ghoul builds
+C|Gourmand's|Easy conditional damage when well fed and hydrated, but weaker than premier damage prefixes
+B|Lucid|Strong ghoul-oriented damage scaling tied to Feral meter; excellent in the right build but not universal
 D|Enemy-specific effects|Specialized use
 
 [2_STAR]
@@ -82,6 +109,30 @@ B|Crippling|Useful utility
 B|Inertial|AP utility
 C|Explosive|Highly weapon-specific
 F|Riposting|Generally niche
+D|Pick Pocketer's|Utility/gimmick effect with little direct combat value
+B|Steady|Strong +25% melee damage while stationary, but the movement restriction limits general use
+
+[3_STAR]
+A|Barbarian|Kill-streak Strength scaling is excellent for sustained melee combat and synergizes with other kill-streak effects
+C|Blocker|Extra blocked damage is useful for defensive melee play but rarely preferred over offensive or AP-focused third stars
+B|Defender's|Automatic blocking gives meaningful defensive value on melee weapons, especially in close-range builds
+C|Glowing|Build-enabling for Glow-focused ghoul setups but offers little to characters not using that system
+
+[4_STAR]
+B|Bully's|Can scale to very high damage on crippled targets, but needs limb setup and is less immediate than top 4-star damage effects
+A|Charged|Light attacks banking power for a heavy-attack release gives strong melee burst with manageable setup
+B|Combo-Breaker's|Can substantially reduce melee AP consumption, though auto-melee gets a much lower proc chance
+A|Conductor's|Critical hits provide health and AP sustain for the user and nearby teammates; excellent VATS/support utility
+B|Encircler's|Up to +50% damage in crowded fights, but inconsistent against isolated bosses
+A|Fencer's|Up to +50% melee damage with nearby teammates; excellent for team-based melee
+C|Fracturer's|Useful area damage from crippling limbs, but setup-dependent and weaker for single-target boss damage
+C|Icemen's|Cryo slow/control is useful but highly weapon- and encounter-dependent
+S|Polished|Up to +60% weapon damage at high condition; one of the strongest broadly useful 4-star damage effects if maintained
+S|Pounder's|Can ramp to enormous melee damage through Onslaught stacks; premier choice for sustained melee/auto-melee
+A|Pyromaniac's|Huge bonus damage against burning targets and easy to exploit on fire-oriented weapons/builds
+A|Thrill-Seeker's|Kill-streak scaling to faster reload and melee attack speed is very strong in sustained combat
+A|Viper's|Huge bonus damage against poisoned targets; excellent when poison application is reliable
+A|Tarnished|Can reach extremely high bonus damage as weapon condition falls, but requires deliberately managing low durability
 
 [REGULAR_ARMOR]
 [1_STAR]
@@ -95,6 +146,10 @@ B|Weightless|Useful for specific stealth/utility setups
 B|Chameleon|Good stealth utility
 C|Vanguard's|Usable but generally below top choices
 C|Mutant's|Useful in some builds
+A|Adrenal|Kill-streak DR/ER scaling can become very strong in sustained combat, though it must ramp
+B|Heavyweight|Potentially large damage reduction while heavily encumbered, but the condition conflicts with normal mobility
+B|Lucid|Strong damage reduction for ghoul/Feral-meter builds, but niche for non-ghoul characters
+C|Regenerating|Passive healing is convenient, but combat value is low compared with Unyielding or Overeater's
 D|Enemy-specific effects|Specialized use
 
 [2_STAR]
@@ -109,6 +164,13 @@ B|Fireproof|Useful defensive specialization
 C|Perception|Build dependent
 C|Charisma|Mostly team/support utility
 D|Antiseptic|Only protects against environmental disease sources
+A|Elementalist|+25 to all resistances is broadly useful and especially good on sets lacking elemental protection
+C|Fierce|Limb-resistance scaling can help specific kill-streak builds but is rarely a priority
+D|Glutton|Slower hunger/thirst drain is mostly convenience and offers little direct combat power
+B|Hardy|7% less explosion damage per piece is strong in explosive-heavy content and also mitigates self-damage
+B|Pain Killer|Kill-streak health regeneration can become strong during mob-heavy events, but requires ramping
+A|Rushing|Kill-streak AP regeneration can become excellent for VATS, sprint and power-attack builds
+C|Warming|+50 cryo resistance is useful in specific encounters but far less universal than AP/SPECIAL effects
 D|Other effects|Niche
 
 [3_STAR]
@@ -124,7 +186,33 @@ B|Doctor's|Useful convenience
 B|Durability|Good general-purpose option
 C|Safecracker's|Niche
 D|Frozen|5% is an extremely low proc chance, and you're only getting the effect when you're hit by a melee attacker
+C|Adamantium|Limb-damage reduction is useful but usually lower priority than weight reduction, Sentinel's or utility effects
+D|Burning|Very low melee-hit proc chance makes its retaliation damage unreliable
+B|Defender's|Automatic blocking can provide meaningful passive mitigation, especially when stacked
+D|Dissipating|Radiation removal can actively conflict with low-health/radiation builds and is rarely optimal
+D|Diver's|Underwater breathing is pure convenience in very limited content
+D|Electrified|Low proc chance and modest retaliation damage make it a niche defensive effect
+B|Healthy|+20 max HP per piece is straightforward survivability and stacks well on full-health builds
+B|Reflex|Evade chance can be valuable when stacked and synergizes with lighter/HP-focused builds
+D|Toxic|Low proc chance and modest poison retaliation damage make it niche
 D|Other effects|Highly specialized
+
+[4_STAR]
+S|Limit-Breaking|Excellent VATS crit builds
+S|Rejuvenator's|Excellent personal/team sustain
+S|Ranger's|Major ranged damage boost
+A|Reflective|Strong defensive/offensive combination
+A|Tanky's|Strong defensive option
+B|Sawbones|Good passive healing
+B|Runner's|Excellent mobility
+B|Miasma's|Niche offensive utility
+B|Aegis|Team-oriented defense
+C|Propelling|Mobility; build dependent
+C|Battle-Loader's|Weapon-specific utility
+D|Choo-Choo's|Mostly gimmick
+A|Bruiser's|Up to +25% melee weapon damage from a full set; excellent for dedicated melee characters
+A|Scanner's|Strong VATS-focused utility and valuable on AP-intensive setups
+A|Stalwart's|Useful team-defense effect with solid group value
 
 [POWER_ARMOR]
 [1_STAR]
@@ -138,6 +226,9 @@ C|Enemy-specific effects|Excellent only in appropriate situations
 C|Auto-Stim|Useful in specific situations, but generally not worth spending a valuable 1 star slot on for an optimized PA set.
 D|Cloaking|Power Armor already has substantial stealth disadvantages.
 D|Other effects|Limited value
+A|Adrenal|Kill-streak resistance scaling adds strong sustained defense, though Overeater's remains more consistent
+B|Lucid|Good ghoul/Feral-meter damage reduction, but restricted to that playstyle
+C|Regenerating|Convenient passive healing but a weak use of the first-star slot compared with top defensive prefixes
 
 [2_STAR]
 S|Powered|Action Point regeneration
@@ -147,6 +238,12 @@ A|Endurance|Survivability
 A|Luck|VATS builds
 B|Poisoner's|Useful against poison-heavy encounters
 B|Fireproof|Useful defense
+A|Elementalist|Broad all-resistance increase is useful even on PA and helps cover elemental damage types
+D|Glutton|Mostly convenience; PA builds gain little from spending a second-star slot on hunger/thirst reduction
+B|Hardy|Strong protection from explosions and self-inflicted explosive damage
+B|Pain Killer|Useful kill-streak healing in sustained combat, though PA already has strong innate survivability
+A|Rushing|Strong AP regeneration at high kill streaks, valuable for VATS, sprinting and power attacks
+C|Warming|Solid cryo resistance for specific content but too specialized for most optimized sets
 C|Other SPECIAL effects|Build dependent
 
 [3_STAR]
@@ -158,32 +255,20 @@ A|Acrobat's|Especially useful with jetpack PA
 B|Sentinel's|Strong when stationary
 B|Durability|Good general-purpose option
 C|HazMat|Power Armor already has substantial radiation protection
+D|Burning|Low melee-hit proc chance and modest retaliation damage are poor compared with weight/utility effects
+B|Defender's|Passive automatic blocking adds real mitigation, though it competes with premier third-star utility
+D|Dissipating|Radiation removal is often unnecessary in PA and can disrupt low-health/rad-managed builds
+D|Electrified|Low proc chance and modest return damage make it niche
+B|Healthy|Extra max HP is useful general survivability
+D|Toxic|Low proc chance and modest poison retaliation damage make it niche
 C|Other weight reductions|Useful depending on inventory
 
-[4_STAR_REGULAR_ARMOR]
-S|Limit-Breaking|Excellent VATS crit builds
-S|Rejuvenator's|Excellent personal/team sustain
-S|Ranger's|Major ranged damage boost
-A|Reflective|Strong defensive/offensive combination
-A|Scanner|Strong VATS utility
-A|Tanky's|Strong defensive option
-A|Stalwart|Strong team defense
-B|Sawbones|Good passive healing
-B|Runner's|Excellent mobility
-B|Miasma's|Niche offensive utility
-B|Aegis|Team-oriented defense
-C|Propelling|Mobility; build dependent
-C|Battle-Loader's|Weapon-specific utility
-D|Choo-Choo's|Mostly gimmick
-
-[4_STAR_POWER_ARMOR]
+[4_STAR]
 S|Rejuvenator's|Outstanding sustain and team support
 S|Reflective|Strong defensive/offensive effect
 S|Ranger's|Excellent ranged PA damage option
 A|Aegis|Strong team defensive aura
-A|Scanner|Excellent VATS PA utility
 A|Limit-Breaking|Excellent crit-oriented option
-A|Stalwart|Strong team defense
 B|Propelling|Great movement
 B|Radioactive-Powered|Strong AP regeneration with radiation tradeoff
 B|Tanky's|Strong defensive choice
@@ -191,6 +276,9 @@ B|Runner's|Great mobility
 B|Sawbones|Passive healing
 C|Miasma's|Situational
 D|Choo-Choo's|Mostly fun/gimmick
+A|Bruiser's|Up to +25% melee weapon damage on a full PA set; excellent for melee PA builds
+A|Scanner's|Strong VATS utility for PA builds that can support the AP demand
+A|Stalwart's|Solid team-defense utility and worthwhile in coordinated groups
 
 [QUICK_KEEP_LIST]
 RANGED_1_STAR|Quad|Anti-Armor|Bloodied|Vampire's|Aristocrat's|Two Shot
@@ -204,7 +292,7 @@ ARMOR_3_STAR|Sentinel's|Arms Keeper's|Thru-hiker's|Acrobat's
 POWER_ARMOR_1_STAR|Overeater's|Troubleshooter's|Aristocrat's
 POWER_ARMOR_2_STAR|Powered|Intelligence|Strength|Endurance|Luck
 POWER_ARMOR_3_STAR|Thru-hiker's|Arms Keeper's|Acrobat's
-FOUR_STAR|Rejuvenator's|Reflective|Ranger's|Limit-Breaking|Scanner|Aegis|Stalwart|Tanky's|Radioactive-Powered|Runner's
+FOUR_STAR|Rejuvenator's|Reflective|Ranger's|Limit-Breaking|Scanner's|Aegis|Stalwart's|Tanky's|Radioactive-Powered|Runner's
 
 [PROGRAMMING_NOTES]
 - Treat tiers as general community-opinion priors, not universal rankings.
